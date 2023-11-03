@@ -165,10 +165,9 @@
     \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
     % Document parameters
     % Document title
+
     
-    
-    
-    
+
     
     
     
@@ -385,6 +384,10 @@
     
 
 \begin{document}
+    
+    
+
+    
     \section{AE332: Modelling and Analysis
 Lab}\label{ae332-modelling-and-analysis-lab}
 
@@ -923,7 +926,7 @@ scheme}\label{session-1-part-2-to-solve-convection-and-diffusion-equations-using
 \PY{n}{Tend} \PY{o}{=} \PY{l+m+mi}{2}
 \PY{k}{def} \PY{n+nf}{u0}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{:}
     \PY{n}{U} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{y}\PY{p}{)}
-    \PY{n}{U} \PY{o}{=} \PY{l+m+mi}{40} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1000}\PY{o}{*}\PY{n}{y}
+    \PY{n}{U}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{40}
     \PY{k}{return} \PY{n}{U}
     
 \PY{n}{dx} \PY{o}{=} \PY{n}{dy} \PY{o}{=} \PY{l+m+mf}{0.001}
@@ -940,7 +943,8 @@ scheme}\label{session-1-part-2-to-solve-convection-and-diffusion-equations-using
 \PY{k}{def} \PY{n+nf}{FTCS\PYZus{}Navier}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{dt}\PY{p}{,} \PY{n}{u0}\PY{p}{,} \PY{n}{dp\PYZus{}dx}\PY{p}{)}\PY{p}{:}
     \PY{n}{U} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{T}\PY{o}{.}\PY{n}{size}\PY{p}{,} \PY{n}{X}\PY{o}{.}\PY{n}{size}\PY{p}{)}\PY{p}{)}
     \PY{n}{U}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{u0}
-    \PY{n}{U}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{X}\PY{o}{.}\PY{n}{size}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{0} 
+    \PY{n}{U}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{X}\PY{o}{.}\PY{n}{size}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{0}
+    \PY{n}{U}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{40}
     \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{T}\PY{o}{.}\PY{n}{size}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{X}\PY{o}{.}\PY{n}{size}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
             \PY{n}{U}\PY{p}{[}\PY{n}{t}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{x}\PY{p}{]} \PY{o}{=} \PY{n}{U}\PY{p}{[}\PY{n}{t}\PY{p}{,} \PY{n}{x}\PY{p}{]} \PY{o}{+} \PY{p}{(}\PY{n}{alpha}\PY{o}{*}\PY{n}{dt}\PY{o}{/}\PY{n}{dx}\PY{o}{/}\PY{n}{dx}\PY{o}{*}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{t}\PY{p}{,}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{U}\PY{p}{[}\PY{n}{t}\PY{p}{,} \PY{n}{x}\PY{p}{]} \PY{o}{+} \PY{n}{U}\PY{p}{[}\PY{n}{t}\PY{p}{,}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{dp\PYZus{}dx} \PY{o}{/} \PY{n}{rho}\PY{o}{*}\PY{n}{dt}\PY{p}{)}
@@ -965,21 +969,21 @@ scheme}\label{session-1-part-2-to-solve-convection-and-diffusion-equations-using
 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t = 0s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-\PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{]}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{]}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.04}\PY{p}{]}\PY{p}{)}
 
 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
 \PY{n}{idx} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{T} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.18}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{idx}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t = 0.18s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-\PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{]}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{]}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.04}\PY{p}{]}\PY{p}{)}
 
 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
 \PY{n}{idx} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{T} \PY{o}{\PYZhy{}} \PY{l+m+mf}{1.08}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{idx}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t = 1.08s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-\PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{]}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{]}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.04}\PY{p}{]}\PY{p}{)}
 
 \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Problem 4: Velocity Profile variation with Time (dp/dt = 0 N/m\PYZca{}2/m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
@@ -1012,21 +1016,21 @@ scheme}\label{session-1-part-2-to-solve-convection-and-diffusion-equations-using
 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t = 0s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-\PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{]}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{]}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.04}\PY{p}{]}\PY{p}{)}
 
 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
 \PY{n}{idx} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{T} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.18}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{idx}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t = 0.18s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-\PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{]}\PY{p}{)}
+\PY{c+c1}{\PYZsh{}plt.xlim([0,40])}
 \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.04}\PY{p}{]}\PY{p}{)}
 
 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
 \PY{n}{idx} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{T} \PY{o}{\PYZhy{}} \PY{l+m+mf}{1.08}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{idx}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t = 1.08s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-\PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{40}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\PY{c+c1}{\PYZsh{}plt.xlim([\PYZhy{}40, 0])}
 \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.04}\PY{p}{]}\PY{p}{)}
 
 \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Problem 4: Velocity Profile variation with Time (dp/dt = 20000 N/m\PYZca{}2/m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
@@ -1058,21 +1062,21 @@ scheme}\label{session-1-part-2-to-solve-convection-and-diffusion-equations-using
 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t = 0s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-\PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{]}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{]}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.04}\PY{p}{]}\PY{p}{)}
 
 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
 \PY{n}{idx} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{T} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.18}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{idx}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t = 0.18s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-\PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{]}\PY{p}{)}
+\PY{c+c1}{\PYZsh{}plt.xlim([0,40])}
 \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.04}\PY{p}{]}\PY{p}{)}
 
 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
 \PY{n}{idx} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{T} \PY{o}{\PYZhy{}} \PY{l+m+mf}{1.08}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{idx}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t = 1.08s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-\PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{]}\PY{p}{)}
+\PY{c+c1}{\PYZsh{}plt.xlim([0, 40])}
 \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.04}\PY{p}{]}\PY{p}{)}
 
 \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Problem 4: Velocity Profile variation with Time (dp/dt = \PYZhy{}30000 N/m\PYZca{}2/m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
