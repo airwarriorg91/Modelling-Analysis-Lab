@@ -1,0 +1,31 @@
+load "msh3"
+real m = 100; 
+real d = 0.001;
+int h = 20;
+int k = 200;
+real l=0.05; 
+int Ti = 300;
+int Tf = 30;
+real p = pi * d;
+real A = pi * d * d / 4;
+
+meshL Th = segment(m,[x*l]);
+
+real[int] xaxis(m+1), Uline(m+1);
+ofstream file2("results2.csv");
+
+fespace Vh(Th, P1);
+Vh T, v;
+
+solve Poission(T,v)  = int1d(Th)(k*dx(T)*dx(v))
+				+int1d(Th)(p*h/A*T*v)
+				-int1d(Th)(p*h/A*Tf*v)
+				+on(1, T=300);
+
+plot(T, value=true, wait=true, fill=true, aspectratio=true);
+for(int i=0; i<=m; i++){
+	
+	xaxis[i] = l * i/m;
+	Uline[i] = T[][i];
+	file2 << xaxis[i] << "," << Uline[i] << endl ;
+}

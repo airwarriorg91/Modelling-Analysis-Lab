@@ -1,0 +1,13 @@
+-- FreeFem++ v4.13 (Sat Jul  8 11:10:05 CEST 2023 - git v4.13)
+   file : C:\Users\gaura\OneDrive\Desktop\Modelling&Analysis Lab\fluid\session4\problem1.edp
+ Load: lg_fem lg_mesh lg_mesh3 eigenvalue
+    1 : load '
+ Error line number 1, in file C:\Users\gaura\OneDrive\Desktop\Modelling&Analysis Lab\fluid\session4\problem1.edp, before  token '
+syntax error
+  current line = 1
+Compile error : syntax error
+        line number :1, '
+error Compile error : syntax error
+        line number :1, '
+ code = 1 mpirank: 0
+ try getConsole C:\Users\gaura\OneDrive\Desktop\Modelling&Analysis Lab\fluid\session4\problem1.edp
