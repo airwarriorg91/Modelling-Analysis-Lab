@@ -1,0 +1,43 @@
+load "msh3"
+real m = 100;
+int l=1;
+real dt = 0.001;
+real T = 1;
+meshL Th = segment(m,[x*l]);
+func T0 = x - x^2; 
+
+ofstream ff("result1.csv");
+
+fespace Vh(Th, P1);
+Vh t=T0, v, told;
+
+problem heateqn(t,v)= int1d(Th)(dx(t)*dx(v))
+				+int1d(Th)(v*t/dt)
+				-int1d(Th)(v*told/dt);
+				//+on(1,2, t=0);
+
+
+//ff<<"t"<<",";
+for(int j=0; j<=m; j++){
+		if(j==m){
+			ff <<"x"<<j;
+		}else{
+			ff <<"x"<<j<<",";
+		}
+	}
+ff<<endl;
+for(real i=0; i<=T; i+=dt){
+	told = t;
+	heateqn;
+	//ff<<"t"<<i/dt<<",";
+	for(int j=0; j<=m; j++){
+		if(j==m){
+			ff <<told[][j];
+		}else{
+			ff <<told[][j]<<",";
+		}
+	}
+	ff<<endl;
+}
+
+//plot(t, wait=true, value=true);
